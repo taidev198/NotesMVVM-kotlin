@@ -1,25 +1,29 @@
 package com.framgia.notesmvvm.adapter
 
 import android.content.Context
+import android.databinding.DataBindingUtil
+
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.framgia.notesmvvm.R
-import com.framgia.notesmvvm.data.Note
+import com.framgia.notesmvvm.model.Note
+import com.framgia.notesmvvm.databinding.NoteItemBinding
 
 /**
  * Created by superme198 on 03,May,2019
  * in NotesMVVM.
- *
+ *binding adapter:https://www.androidhive.info/android-databinding-in-recyclerview-profile-screen/
  */
 class NoteAdapter(var context: Context) : RecyclerView.Adapter<NoteAdapter.NoteViewHolder>() {
 
     var notes: List<Note>? = null
 
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): NoteViewHolder {
-        val v: View = LayoutInflater.from(context).inflate(R.layout.note_items, p0, false)
-        return NoteViewHolder(v)
+        val binding: NoteItemBinding = DataBindingUtil.inflate(
+            LayoutInflater.from(context),R.layout.note_item, p0, false)
+            return NoteViewHolder(binding.root, binding)
     }
 
     override fun getItemCount(): Int {
@@ -40,16 +44,13 @@ class NoteAdapter(var context: Context) : RecyclerView.Adapter<NoteAdapter.NoteV
         notes = listNotes
     }
 
-    class NoteViewHolder(item: View) : RecyclerView.ViewHolder(item) {
-
-        lateinit var title: String
-        lateinit var subtitle: String
-        var priority: Int = 0
+    class NoteViewHolder(
+        item: View,
+        var binding: NoteItemBinding
+    ) : RecyclerView.ViewHolder(item) {
 
         fun bindData(note: Note) {
-            title = note.title
-            subtitle = note.description
-            priority = note.priority
+            binding.item = note
         }
     }
 }

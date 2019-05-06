@@ -6,6 +6,7 @@ import android.arch.persistence.room.Room
 import android.arch.persistence.room.RoomDatabase
 import android.content.Context
 import android.os.AsyncTask
+import com.framgia.notesmvvm.model.Note
 import com.framgia.notesmvvm.viewmodel.NoteViewModel
 import java.util.logging.Logger
 
@@ -23,8 +24,6 @@ abstract class NoteDataBase : RoomDatabase() {
         private var instance: NoteDataBase? = null
 
         fun getInstance(context: Context): NoteDataBase? {
-            Logger.getLogger(NoteViewModel::class.java.name).warning("Hello..")
-
             if (instance == null) {
                 synchronized(NoteDataBase::class) {
                     instance = Room.databaseBuilder(

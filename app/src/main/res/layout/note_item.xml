@@ -3,7 +3,7 @@
         xmlns:tools="http://schemas.android.com/tools">
     <data>
         <variable name="item"
-                  type="com.framgia.notesmvvm.adapter.NoteAdapter.NoteViewHolder"/>
+                  type="com.framgia.notesmvvm.model.Note"/>
     </data>
     <android.support.v7.widget.CardView
             android:layout_width="match_parent"
@@ -31,7 +31,7 @@
                     android:maxLines="1"
                     android:layout_height="wrap_content"
                     android:id="@+id/text_subtitle"
-                    android:text="@{item.subtitle}"
+                    android:text="@{item.description}"
                     app:layout_constraintStart_toStartOf="@+id/text_title"
                     app:layout_constraintEnd_toEndOf="@+id/text_title"
                     android:layout_marginEnd="8dp"

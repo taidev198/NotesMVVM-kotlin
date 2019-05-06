@@ -2,6 +2,7 @@ package com.framgia.notesmvvm.data
 
 import android.arch.lifecycle.LiveData
 import android.arch.persistence.room.*
+import com.framgia.notesmvvm.model.Note
 
 /**
  * Created by superme198 on 03,May,2019
