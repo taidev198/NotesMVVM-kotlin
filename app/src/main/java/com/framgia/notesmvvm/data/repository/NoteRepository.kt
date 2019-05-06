@@ -1,8 +1,10 @@
-package com.framgia.notesmvvm.data
+package com.framgia.notesmvvm.data.repository
 
 import android.app.Application
 import android.arch.lifecycle.LiveData
 import android.os.AsyncTask
+import com.framgia.notesmvvm.data.NoteDAO
+import com.framgia.notesmvvm.data.NoteDataBase
 import com.framgia.notesmvvm.model.Note
 
 /**
@@ -17,25 +19,35 @@ class NoteRepository(application: Application) {
     private var allNotes: LiveData<List<Note>>
 
     init {
-        val dataBase: NoteDataBase = NoteDataBase.getInstance(application.applicationContext)!!
+        val dataBase: NoteDataBase = NoteDataBase.getInstance(
+            application.applicationContext
+        )!!
         noteDao = dataBase.noteDao()
         allNotes = noteDao.getAllNotes()
     }
 
     fun insert(note: Note) {
-        val insertNoteAsyncTask = InsertNoteAsyncTask(noteDao).execute(note)
+        val insertNoteAsyncTask = InsertNoteAsyncTask(
+            noteDao
+        ).execute(note)
     }
 
     fun update(note: Note) {
-        val updateNoteAsyncTask = UpdateNoteAsyncTask(noteDao).execute(note)
+        val updateNoteAsyncTask = UpdateNoteAsyncTask(
+            noteDao
+        ).execute(note)
     }
 
     fun delete(note: Note) {
-        val deleteNoteAsyncTask = DeleteNoteAsyncTask(noteDao).execute(note)
+        val deleteNoteAsyncTask = DeleteNoteAsyncTask(
+            noteDao
+        ).execute(note)
     }
 
     fun deleteAll() {
-        val deleteAllNotesAsyncTask = DeleteAllNotesAsyncTask(noteDao).execute()
+        val deleteAllNotesAsyncTask = DeleteAllNotesAsyncTask(
+            noteDao
+        ).execute()
     }
 
     fun getAllNotes(): LiveData<List<Note>> {

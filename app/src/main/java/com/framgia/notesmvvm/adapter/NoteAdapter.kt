@@ -18,7 +18,7 @@ import com.framgia.notesmvvm.databinding.NoteItemBinding
  */
 class NoteAdapter(var context: Context) : RecyclerView.Adapter<NoteAdapter.NoteViewHolder>() {
 
-    var notes: List<Note>? = null
+    var notes: List<Note> = ArrayList()
 
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): NoteViewHolder {
         val binding: NoteItemBinding = DataBindingUtil.inflate(
@@ -28,19 +28,15 @@ class NoteAdapter(var context: Context) : RecyclerView.Adapter<NoteAdapter.NoteV
 
     override fun getItemCount(): Int {
 
-        return if (notes == null) {
-            0
-        } else {
-            notes!!.size
-        }
+        return if (notes.isNullOrEmpty()) 0 else notes.size
 
     }
 
     override fun onBindViewHolder(viewHolder: NoteViewHolder, pos: Int) {
-        viewHolder.bindData(notes!![pos])
+        viewHolder.bindData(notes[pos])
     }
 
-    internal fun setNotes(listNotes: List<Note>?) {
+    internal fun setNotes(listNotes: List<Note>) {
         notes = listNotes
     }
 
@@ -51,6 +47,7 @@ class NoteAdapter(var context: Context) : RecyclerView.Adapter<NoteAdapter.NoteV
 
         fun bindData(note: Note) {
             binding.item = note
+            binding.executePendingBindings()
         }
     }
 }
